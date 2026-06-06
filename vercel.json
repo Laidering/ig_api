@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/download/instagram", "destination": "/api/download" }
+  ]
+}
