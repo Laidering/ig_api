@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request
 import requests
 from bs4 import BeautifulSoup
 import re
@@ -89,19 +89,14 @@ def download_instagram():
         return jsonify({"status": True, "result": result}), 200
 
 
-# CORS Headers for compatibility
-@app.after_request
-def add_cors_headers(response):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
-    response.headers['Access-Control-Allow-Methods'] = 'GET,OPTIONS'
-    return response
-
-
-# Serve Frontend
+# Optional: Health Check
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return jsonify({
+        "status": True,
+        "message": "Instagram Downloader API is running",
+        "endpoints": ["/download/instagram?url=INSTAGRAM_LINK"]
+    })
 
 
 if __name__ == '__main__':
